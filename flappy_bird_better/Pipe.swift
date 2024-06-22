@@ -39,7 +39,7 @@ class Pipe: SKSpriteNode {
     func animation (_ scene_start: Double, _ duration: Double) -> SKAction {
         position = CGPoint(x: scene_start, y: position.y)
         let bypass = SKAction.move(to: CGPoint(x: -size.width, y: position.y), duration: duration)
-        return SKAction.sequence([bypass, SKAction.removeFromParent()])
+        return bypass
     }
     
 }

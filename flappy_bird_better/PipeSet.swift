@@ -21,7 +21,8 @@ class PipeSet {
 
     
     func animate(_ scene_start: Double, _ duration: Double) {
-        pipes.0.run(pipes.0.animation(scene_start, duration))
-        pipes.1.run( pipes.1.animation(scene_start, duration))
+        pipes.0.run(SKAction.sequence([pipes.0.animation(scene_start, duration), SKAction.removeFromParent()]))
+        pipes.1.run(SKAction.sequence([ pipes.1.animation(scene_start, duration), SKAction.run {
+            (self.pipes.1.parent as? City)?.score += 1        }, SKAction.removeFromParent()]))
     }
 }
