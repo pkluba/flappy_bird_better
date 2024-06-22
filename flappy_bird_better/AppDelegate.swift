@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  flappy_bird_better
 //
-//  Created by Wiktoria Siedlecka on 16/05/2024.
+//  Created by Piotr Kluba on 16/05/2024.
 //
 
 import UIKit

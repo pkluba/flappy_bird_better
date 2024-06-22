@@ -2,7 +2,7 @@
 //  GameViewController.swift
 //  flappy_bird_better
 //
-//  Created by Wiktoria Siedlecka on 16/05/2024.
+//  Created by Piotr Kluba on 16/05/2024.
 //
 
 import UIKit
@@ -13,22 +13,21 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let view = self.view as! SKView
+        let scene = City()
+
+        // Set the scale mode to scale to fit the window
+        scene.scaleMode = .resizeFill
         
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
+        // Present the scene
+        view.presentScene(scene)
+
             
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        view.ignoresSiblingOrder = true
+        
+        view.showsFPS = true
+        view.showsNodeCount = true
+        
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
