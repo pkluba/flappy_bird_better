@@ -9,20 +9,36 @@ import Foundation
 import UIKit
 import SpriteKit
 
-class PipeSet {
+class PipeSet: SKNode {
     
-    var pipes: (Pipe, Pipe)
+    var pipe0:Pipe
+    var pipe1:Pipe
     
     init(middle: Double, gap: Double) {
-        pipes.0 = Pipe(imageName: "pipe", orientation: "up", ending: middle - (gap / 2.0))
-        pipes.1 = Pipe(imageName: "pipe", orientation: "down", ending: middle + (gap / 2.0))
+       
+        
+        pipe0 = Pipe(imageName: "pipeup", orientation: "up", ending: middle - (gap / 2.0))
+        pipe1 = Pipe(imageName: "pipedown", orientation: "down", ending: middle + (gap / 2.0))
+        
+        super.init()
+        
+        self.zPosition = 1
+        
+        addChild(pipe0)
+        addChild(pipe1)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 
     
     func animate(_ scene_start: Double, _ duration: Double) {
-        pipes.0.run(SKAction.sequence([pipes.0.animation(scene_start, duration), SKAction.removeFromParent()]))
-        pipes.1.run(SKAction.sequence([ pipes.1.animation(scene_start, duration), SKAction.run {
-            (self.pipes.1.parent as? City)?.score += 1        }, SKAction.removeFromParent()]))
+        pipe0.run(pipe0.animation(scene_start, duration))
+        pipe1.run(pipe1.animation(scene_start, duration))
+        
+        run(SKAction.sequence([SKAction.wait(forDuration: duration), SKAction.run {
+            (self.parent as? City)?.score += 1        }, SKAction.removeFromParent()]))
     }
 }

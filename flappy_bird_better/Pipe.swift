@@ -14,22 +14,25 @@ class Pipe: SKSpriteNode {
         
         super.init(texture: texture, color: SKColor.clear, size: texture.size())
         
+        setScale(0.25)
+    
         if (orientation == "down") {
-            zRotation = Double.pi
-            anchorPoint = CGPoint(x: 1, y: 1)
+            position = CGPoint(x: 0, y: ending + size.height / 2)
         }
         else if (orientation == "up") {
-            zRotation = 0
-            anchorPoint = CGPoint(x: 0, y: 1)
-
+            position = CGPoint(x: 0, y: ending - size.height / 2)
         }
         
-        position = CGPoint(x: 0, y: ending)
+        physicsBody = SKPhysicsBody(rectangleOf: size)
+
+        physicsBody?.affectedByGravity = false
+        physicsBody?.isDynamic = false
+        physicsBody?.usesPreciseCollisionDetection = false
+        physicsBody?.categoryBitMask = Collision.Pipe
+//        physicsBody?.contactTestBitMask = Collision.Birdie
+        physicsBody?.collisionBitMask = 0x0
         
-        setScale(0.25)
-        
-        
-        zPosition = 3
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,7 +40,7 @@ class Pipe: SKSpriteNode {
     }
     
     func animation (_ scene_start: Double, _ duration: Double) -> SKAction {
-        position = CGPoint(x: scene_start, y: position.y)
+        position = CGPoint(x: scene_start + self.size.width, y: position.y)
         let bypass = SKAction.move(to: CGPoint(x: -size.width, y: position.y), duration: duration)
         return bypass
     }

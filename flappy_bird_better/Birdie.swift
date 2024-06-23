@@ -14,9 +14,17 @@ class Birdie: SKSpriteNode {
         
         super.init(texture: texture, color: SKColor.clear, size: CGSize(width: texture.size().width * scale, height: texture.size().height * scale))
         
-        physicsBody = SKPhysicsBody(texture: texture, size: size)
+        physicsBody = SKPhysicsBody(texture: self.texture!, size: self.size)
+        
+//        physicsBody = SKPhysicsBody(circleOfRadius: size.height / 3.0)
+        
         
         physicsBody?.affectedByGravity = false
+        physicsBody?.isDynamic = true
+        physicsBody?.usesPreciseCollisionDetection = false
+        physicsBody?.categoryBitMask = Collision.Birdie
+        physicsBody?.contactTestBitMask = Collision.Pipe | Collision.Border
+        physicsBody?.collisionBitMask = 0x0
         
         
         
