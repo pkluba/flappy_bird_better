@@ -19,13 +19,11 @@ class City: SKScene, SKPhysicsContactDelegate {
     let gameBackground1:Background = Background(imageName: "background")
     let gameBackground2:Background = Background(imageName: "background")
     
-    let birdie:Birdie = Birdie(imageName: "bird", scale: 0.05)
+    var birdie:Birdie?
     
     let scoreLabel: SKLabelNode = SKLabelNode(fontNamed: "Chalkduster")
     
     let borderCollisionBody:SKNode = SKNode()
-    
-
     
     var firstTouch: Bool = true
     var nextPipes: Bool = false
@@ -44,6 +42,9 @@ class City: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: -6)
         self.physicsWorld.contactDelegate = self
         
+        lastMiddle = size.height / 2.0
+        gapSize = size.height / 3.5
+        
         gameBackground1.size = CGSize(width: (gameBackground1.texture!.size().width) * (size.height / gameBackground1.texture!.size().height), height: size.height)
         gameBackground2.size = CGSize(width: (gameBackground2.texture!.size().width) * (size.height / gameBackground2.texture!.size().height), height: size.height)
         gameBackground1.position = CGPoint(x: 0, y: 0)
@@ -53,12 +54,11 @@ class City: SKScene, SKPhysicsContactDelegate {
         addChild(gameBackground2)
         gameBackground1.run(gameBackground1.scroll(10))
         gameBackground2.run(gameBackground2.scroll(10))
+        birdie = Birdie(imageName: "bird", height: gapSize / 3.0)
+        birdie!.position = CGPoint(x: size.width / 8, y: size.height/2)
+        addChild(birdie!)
         
-        birdie.position = CGPoint(x: size.width / 8, y: size.height/2)
-        addChild(birdie)
-        
-        lastMiddle = size.height / 2.0
-        gapSize = size.height / 3.5
+
         
         scoreLabel.horizontalAlignmentMode = .center
         scoreLabel.position = CGPoint(x: size.width / 2.0, y: size.height * 0.8)
@@ -67,7 +67,7 @@ class City: SKScene, SKPhysicsContactDelegate {
         scoreLabel.text = "\(0)"
         addChild(scoreLabel)
         
-        self.borderCollisionBody.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: -self.birdie.size.height / 2, width: size.width, height: size.height + self.birdie.size.height))
+        self.borderCollisionBody.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: -self.birdie!.size.height / 2, width: size.width, height: size.height + self.birdie!.size.height))
         
         self.borderCollisionBody.physicsBody!.categoryBitMask = Collision.Border
         
@@ -84,12 +84,20 @@ class City: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (firstTouch) {
-            birdie.start()
-            firstTouch = false
-            nextPipes = true
-        }
-        birdie.jump(300)
+        if !self.isPaused {
+            if (firstTouch) {
+                birdie!.start()
+                firstTouch = false
+                nextPipes = true
+            }
+            birdie!.jump(300)}
+//        else {
+//            let touch = touches.first
+//            let touchLocation = touch?.location(in: self)
+//            let touchedNode = self.atPoint(touchLocation!)
+//            if(touchedNode.name == "startagain"){
+//            
+//        }
     }
     
     func checkBackgrounds() {
@@ -138,27 +146,24 @@ class City: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
-        let dimPanel = SKSpriteNode(color: UIColor.black, size: self.size)
-        dimPanel.alpha = 0.3
-        dimPanel.zPosition = 100
-        dimPanel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
-        self.addChild(dimPanel)
         
-        let overLabel: SKLabelNode = SKLabelNode(fontNamed: "Chalkduster")
         
-        overLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+//        let againButton = CustomButton(position: CGPoint(x: self.size.width/4, y: self.size.height * 2/5), height: self.size.height * 1/5, childNames: "startagain", text: "Retry")
+//                                       
+//       let backButton = CustomButton(position: CGPoint(x: self.size.width * 3/4, y: self.size.height * 2/5), height: self.size.height * 1/5, childNames: "backmenu", text: "Back to menu")
         
-        overLabel.fontSize = size.height / 4.0
+//        self.addChild(againButton)
+//        self.addChild(backButton)
         
-        overLabel.horizontalAlignmentMode = .center
-        
-        overLabel.verticalAlignmentMode = .center
-        
-        overLabel.text = "Game Over!"
-        
-        overLabel.zPosition = 101
-        self.addChild(overLabel)
+//        self.addChild(overLabel)
         self.isPaused = true
+        
+        let gameOverScene = GameOver()
+        gameOverScene.userData = ["score": score]
+        let transitionType = SKTransition.crossFade(withDuration: 4)
+        gameOverScene.scaleMode = scaleMode
+        view?.presentScene(gameOverScene, transition: transitionType)
+            
     }
 
 }

@@ -9,8 +9,10 @@ import UIKit
 import SpriteKit
 
 class Birdie: SKSpriteNode {
-    init(imageName: String, scale: Double) {
+    init(imageName: String, height: Double) {
         let texture = SKTexture(imageNamed: imageName)
+        
+        let scale = height / texture.size().height
         
         super.init(texture: texture, color: SKColor.clear, size: CGSize(width: texture.size().width * scale, height: texture.size().height * scale))
         

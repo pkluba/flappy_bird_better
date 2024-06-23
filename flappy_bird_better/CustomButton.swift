@@ -2,13 +2,13 @@
 //  File.swift
 //  flappy_bird_better
 //
-//  Created by Wiktoria Siedlecka on 23/06/2024.
+//  Created by Piotr Kluba on 23/06/2024.
 //
 
 import UIKit
 import SpriteKit
 
-class StartGameButton: SKNode {
+class CustomButton: SKNode {
     
     let startGameLabel = SKLabelNode(fontNamed: "Chalkduster")
     
@@ -16,8 +16,9 @@ class StartGameButton: SKNode {
     
     let initPosition:CGPoint
     
+    var clicked: Bool = false
     
-    init(position: CGPoint, height: Double) {
+    init(position: CGPoint, height: Double, childNames: String, text: String) {
         initPosition = position
         
         startGameLabel.horizontalAlignmentMode = .center
@@ -26,12 +27,12 @@ class StartGameButton: SKNode {
         
         startGameLabel.fontSize = height * 0.5
         startGameLabel.position = position
-        startGameLabel.text = "Start game"
-        startGameLabel.name = "startgamelabel"
+        startGameLabel.text = text
         
         startGameBody = SKShapeNode(rect: CGRect(origin: CGPoint(x:-startGameLabel.frame.width * 0.6,y: -height/2), size: CGSize(width: startGameLabel.frame.width * 1.2, height: height)), cornerRadius: height / 4)
         
-        startGameBody.name = "startgame"
+        startGameBody.name = childNames
+        startGameLabel.name = childNames
         startGameBody.fillColor = SKColor.systemPurple
         
         startGameBody.position = position
@@ -43,6 +44,7 @@ class StartGameButton: SKNode {
         addChild(startGameBody)
         addChild(startGameLabel)
         self.zPosition = 1
+        
         
     }
     

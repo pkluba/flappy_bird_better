@@ -11,12 +11,11 @@ import SpriteKit
 
 class NewGameScene: SKScene {
 
-    var buttClicked:Bool = false
-    var startButt:StartGameButton?
+    var startButt:CustomButton?
     
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.black
-        startButt = StartGameButton(position: CGPoint(x: size.width/2, y: size.height/2), height: size.height/3)
+        startButt = CustomButton(position: CGPoint(x: size.width/2, y: size.height/2), height: size.height/3, childNames: "startgame", text: "Start game!")
         
         startButt!.name = "startgame"
         let background:Background = Background(imageName: "background")
@@ -36,23 +35,21 @@ class NewGameScene: SKScene {
         let touchLocation = touch?.location(in: self)
         let touchedNode = self.atPoint(touchLocation!)
         if(touchedNode.name == "startgame"){
-            buttClicked = true
-            startButt?.press()
+            startButt!.clicked = true
+            startButt!.press()
             
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if buttClicked {
-            buttClicked = false
+        if startButt!.clicked {
+            startButt!.clicked = false
+            startButt!.unPress()
             let gameScene = City()
             gameScene.scaleMode = scaleMode
             let transitionType = SKTransition.fade(withDuration: 1)
             
             view?.presentScene(gameScene,transition: transitionType)}
-        
-        buttClicked = false
-        startButt?.unPress()
     }
 
 }
