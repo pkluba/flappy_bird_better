@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = self.view as! SKView
-        let scene = City()
+        let scene = NewGameScene()
 
         // Set the scale mode to scale to fit the window
         scene.scaleMode = .resizeFill

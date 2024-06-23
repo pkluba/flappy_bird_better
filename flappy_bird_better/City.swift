@@ -23,6 +23,8 @@ class City: SKScene, SKPhysicsContactDelegate {
     
     let scoreLabel: SKLabelNode = SKLabelNode(fontNamed: "Chalkduster")
     
+    let borderCollisionBody:SKNode = SKNode()
+    
 
     
     var firstTouch: Bool = true
@@ -36,7 +38,6 @@ class City: SKScene, SKPhysicsContactDelegate {
     }
     var gapSize: Double = 0.0
     var lvl: Int = 0
-    
     
     
     override func didMove(to view: SKView) {
@@ -65,6 +66,15 @@ class City: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontSize = size.height / 8.0
         scoreLabel.text = "\(0)"
         addChild(scoreLabel)
+        
+        self.borderCollisionBody.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: -self.birdie.size.height / 2, width: size.width, height: size.height + self.birdie.size.height))
+        
+        self.borderCollisionBody.physicsBody!.categoryBitMask = Collision.Border
+        
+        self.borderCollisionBody.physicsBody!.collisionBitMask = 0x0
+        
+        addChild(self.borderCollisionBody)
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -118,6 +128,10 @@ class City: SKScene, SKPhysicsContactDelegate {
         }
         
         if (first.categoryBitMask & Collision.Birdie != 0) && (sec.categoryBitMask & Collision.Pipe != 0) {
+            self.gameOver()
+        }
+        
+        if (first.categoryBitMask & Collision.Birdie != 0) && (sec.categoryBitMask & Collision.Border != 0) {
             self.gameOver()
         }
         

@@ -29,7 +29,7 @@ class Pipe: SKSpriteNode {
         physicsBody?.isDynamic = false
         physicsBody?.usesPreciseCollisionDetection = false
         physicsBody?.categoryBitMask = Collision.Pipe
-//        physicsBody?.contactTestBitMask = Collision.Birdie
+
         physicsBody?.collisionBitMask = 0x0
         
 

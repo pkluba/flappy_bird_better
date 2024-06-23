@@ -10,6 +10,8 @@
 		76990B162C25BB300016B8DA /* Birdie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76990B152C25BB300016B8DA /* Birdie.swift */; };
 		76990B1A2C26E0240016B8DA /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76990B192C26E0240016B8DA /* Pipe.swift */; };
 		76990B1C2C26E3850016B8DA /* PipeSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76990B1B2C26E3850016B8DA /* PipeSet.swift */; };
+		76990B1E2C28428B0016B8DA /* NewGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76990B1D2C28428B0016B8DA /* NewGameScene.swift */; };
+		76990B202C2845720016B8DA /* StartGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76990B1F2C2845720016B8DA /* StartGameButton.swift */; };
 		76E9094E2BF625E8008319ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9094D2BF625E8008319ED /* AppDelegate.swift */; };
 		76E909562BF625E8008319ED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E909552BF625E8008319ED /* GameViewController.swift */; };
 		76E909592BF625E8008319ED /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 76E909582BF625E8008319ED /* Base */; };
@@ -24,6 +26,8 @@
 		76990B152C25BB300016B8DA /* Birdie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Birdie.swift; sourceTree = "<group>"; };
 		76990B192C26E0240016B8DA /* Pipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipe.swift; sourceTree = "<group>"; };
 		76990B1B2C26E3850016B8DA /* PipeSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipeSet.swift; sourceTree = "<group>"; };
+		76990B1D2C28428B0016B8DA /* NewGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameScene.swift; sourceTree = "<group>"; };
+		76990B1F2C2845720016B8DA /* StartGameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameButton.swift; sourceTree = "<group>"; };
 		76E9094A2BF625E8008319ED /* flappy_bird_better.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flappy_bird_better.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E9094D2BF625E8008319ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76E909552BF625E8008319ED /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 		76E9094C2BF625E8008319ED /* flappy_bird_better */ = {
 			isa = PBXGroup;
 			children = (
+				76990B1D2C28428B0016B8DA /* NewGameScene.swift */,
 				76990B1B2C26E3850016B8DA /* PipeSet.swift */,
 				76990B192C26E0240016B8DA /* Pipe.swift */,
 				76990B152C25BB300016B8DA /* Birdie.swift */,
@@ -76,6 +81,7 @@
 				76E9095C2BF625EE008319ED /* LaunchScreen.storyboard */,
 				76E9096E2BF650D7008319ED /* City.swift */,
 				76E909702BF65404008319ED /* Background.swift */,
+				76990B1F2C2845720016B8DA /* StartGameButton.swift */,
 			);
 			path = flappy_bird_better;
 			sourceTree = "<group>";
@@ -159,6 +165,8 @@
 				76990B1A2C26E0240016B8DA /* Pipe.swift in Sources */,
 				76E9096F2BF650D7008319ED /* City.swift in Sources */,
 				76E909712BF65404008319ED /* Background.swift in Sources */,
+				76990B202C2845720016B8DA /* StartGameButton.swift in Sources */,
+				76990B1E2C28428B0016B8DA /* NewGameScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
