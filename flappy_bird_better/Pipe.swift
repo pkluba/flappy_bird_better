@@ -15,6 +15,8 @@ class Pipe: SKSpriteNode {
         super.init(texture: texture, color: SKColor.clear, size: texture.size())
         
         setScale(0.25)
+        
+        name = "pipe"
     
         if (orientation == "down") {
             position = CGPoint(x: 0, y: ending + size.height / 2)

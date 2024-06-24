@@ -16,9 +16,7 @@ class Birdie: SKSpriteNode {
         
         super.init(texture: texture, color: SKColor.clear, size: CGSize(width: texture.size().width * scale, height: texture.size().height * scale))
         
-        physicsBody = SKPhysicsBody(texture: self.texture!, size: self.size)
-        
-//        physicsBody = SKPhysicsBody(circleOfRadius: size.height / 3.0)
+        physicsBody = SKPhysicsBody(texture: self.texture!, alphaThreshold: 0.3 ,size: self.size)
         
         
         physicsBody?.affectedByGravity = false
@@ -44,4 +42,5 @@ class Birdie: SKSpriteNode {
     func jump(_ intensity: Int)  {
         physicsBody?.velocity = CGVector(dx: 0, dy: intensity)
     }
+
 }

@@ -37,6 +37,8 @@ class City: SKScene, SKPhysicsContactDelegate {
     var gapSize: Double = 0.0
     var lvl: Int = 0
     
+    var over:Bool = false
+    
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: -6)
@@ -84,19 +86,13 @@ class City: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !self.isPaused {
+        if (self.over == false) {
             if (firstTouch) {
                 birdie!.start()
                 firstTouch = false
                 nextPipes = true
             }
             birdie!.jump(300)}
-//        else {
-//            let touch = touches.first
-//            let touchLocation = touch?.location(in: self)
-//            let touchedNode = self.atPoint(touchLocation!)
-//            if(touchedNode.name == "startagain"){
-//            
 //        }
     }
     
@@ -111,10 +107,11 @@ class City: SKScene, SKPhysicsContactDelegate {
     
     func checkPipes() {
         if (nextPipes) {
-            let randomBound: Double = (Double(lvl) * (size.height / 10.0))
+            let randomBound: Double = (Double(lvl) * (size.height / 5.0))
             
             let nextMiddle: Double = max(gapSize, min((size.height - gapSize), lastMiddle + Double.random(in: -randomBound...randomBound)))
-            let pset = PipeSet(middle: nextMiddle, gap: gapSize)
+            
+            let pset = PipeSet(middle: nextMiddle, gap: gapSize / (1 + 0.05 * Double(lvl)))
             addChild(pset)
             lastMiddle = nextMiddle
             pset.animate(size.width, 5.0)
@@ -147,22 +144,15 @@ class City: SKScene, SKPhysicsContactDelegate {
     
     func gameOver() {
         
-        
-//        let againButton = CustomButton(position: CGPoint(x: self.size.width/4, y: self.size.height * 2/5), height: self.size.height * 1/5, childNames: "startagain", text: "Retry")
-//                                       
-//       let backButton = CustomButton(position: CGPoint(x: self.size.width * 3/4, y: self.size.height * 2/5), height: self.size.height * 1/5, childNames: "backmenu", text: "Back to menu")
-        
-//        self.addChild(againButton)
-//        self.addChild(backButton)
-        
-//        self.addChild(overLabel)
         self.isPaused = true
-        
+
         let gameOverScene = GameOver()
-        gameOverScene.userData = ["score": score]
+        gameOverScene.userData = ["score": self.score]
         let transitionType = SKTransition.crossFade(withDuration: 4)
-        gameOverScene.scaleMode = scaleMode
-        view?.presentScene(gameOverScene, transition: transitionType)
+        gameOverScene.scaleMode = self.scaleMode
+        self.view?.presentScene(gameOverScene, transition: transitionType)
+        
+        
             
     }
 

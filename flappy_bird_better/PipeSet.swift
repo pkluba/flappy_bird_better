@@ -38,6 +38,7 @@ class PipeSet: SKNode {
         pipe1.run(pipe1.animation(scene_start, duration))
         
         run(SKAction.sequence([SKAction.wait(forDuration: duration), SKAction.run {
-            (self.parent as? City)?.score += 1        }, SKAction.removeFromParent()]))
+            if ((self.parent as? City)?.over == false) {
+                (self.parent as? City)?.score += 1 }       }, SKAction.removeFromParent()]))
     }
 }

@@ -10,6 +10,9 @@ import SpriteKit
 
 class GameOver: SKScene {
     
+    var againButton:CustomButton?
+    var backButton:CustomButton?
+    
     override func didMove(to view: SKView) {
         
         backgroundColor = SKColor.black
@@ -46,30 +49,48 @@ class GameOver: SKScene {
         overLabel.zPosition = 1
         
         addChild(overLabel)
+        againButton = CustomButton(position: CGPoint(x: self.size.width/4, y: self.size.height * 2/5), height: self.size.height * 1/5, childNames: "startagain", text: "Retry")
+
+       backButton = CustomButton(position: CGPoint(x: self.size.width * 3/5, y: self.size.height * 2/5), height: self.size.height * 1/5, childNames: "backmenu", text: "Back to menu")
+        
+        addChild(againButton!)
+        addChild(backButton!)
         
     }
 
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch = touches.first
-//        let touchLocation = touch?.location(in: self)
-//        let touchedNode = self.atPoint(touchLocation!)
-//        if(touchedNode.name == "startgame"){
-//            startButt!.clicked = true
-//            startButt!.press()
-//            
-//        }
-//    }
-//    
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if startButt!.clicked {
-//            startButt!.clicked = false
-//            startButt!.unPress()
-//            let gameScene = City()
-//            gameScene.scaleMode = scaleMode
-//            let transitionType = SKTransition.fade(withDuration: 1)
-//            
-//            view?.presentScene(gameScene,transition: transitionType)}
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let touchLocation = touch?.location(in: self)
+        let touchedNode = self.atPoint(touchLocation!)
+        if(touchedNode.name == "startagain"){
+            againButton!.clicked = true
+            againButton!.press()
+        }
+        if(touchedNode.name == "backmenu"){
+            backButton!.clicked = true
+            backButton!.press()
+        }
+    }
+  
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if againButton!.clicked {
+            againButton!.clicked = false
+            againButton!.unPress()
+            let gameScene = City()
+            gameScene.scaleMode = scaleMode
+            let transitionType = SKTransition.crossFade(withDuration: 3)
+            
+            view?.presentScene(gameScene,transition: transitionType)}
+        
+        if backButton!.clicked {
+            backButton!.clicked = false
+            backButton!.unPress()
+            let gameScene = NewGameScene()
+            gameScene.scaleMode = scaleMode
+            let transitionType = SKTransition.fade(withDuration: 2)
+            
+            view?.presentScene(gameScene,transition: transitionType)}
+    }
 
 }
 

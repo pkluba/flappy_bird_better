@@ -17,6 +17,7 @@ class Background: SKSpriteNode {
         super.init(texture: texture, color: SKColor.clear, size: texture.size())
         anchorPoint = CGPoint(x: 0, y: 0)
         zPosition = 0
+        name = "background"
         
     }
     
